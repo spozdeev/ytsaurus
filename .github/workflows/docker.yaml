@@ -51,6 +51,7 @@ jobs:
         run: |
           cd yt/chyt/controller/cmd/chyt-controller && pwd
           pwd
+          export HOME=${RUNNER_WORKSPACE}
           env
           /usr/local/go/bin/go build
 
@@ -66,19 +67,19 @@ jobs:
           cd ../build
           ./run_unittests.sh
 
-#  stop-vm:
-#    name: Stop VM
-#    needs:
-#      - start-vm
-#      - check
-#    runs-on: trampoline
-#    if: ${{ always() }}
-#    steps:
-#      - name: Stop YC runner
-#        uses: yc-actions/yc-github-runner@v1
-#        with:
-#          mode: stop
-#          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-#          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-#          label: ${{ needs.start-vm.outputs.label }}
-#          instance-id: ${{ needs.start-vm.outputs.instance-id }}
+  stop-vm:
+    name: Stop VM
+    needs:
+      - start-vm
+      - check
+    runs-on: trampoline
+    if: ${{ always() }}
+    steps:
+      - name: Stop YC runner
+        uses: yc-actions/yc-github-runner@v1
+        with:
+          mode: stop
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          label: ${{ needs.start-vm.outputs.label }}
+          instance-id: ${{ needs.start-vm.outputs.instance-id }}

@@ -59,7 +59,7 @@ jobs:
         shell: bash
         run: |
           mkdir ../docker-build
-          ./yt/docker/yt_nightly/build.sh --ytsaurus-source-path $(pwd) --ytsaurus-build-path ../build --output-path ../docker-build --registry cr.yandex/crpl84hkh3k16ihscv0j/ytsaurus-nightly --tag ${INVOCATION_ID}
+          ./yt/docker/yt_nightly/build.sh --ytsaurus-source-path $(pwd) --ytsaurus-build-path /home/dmitry/build --output-path ../docker-build --registry cr.yandex/crpl84hkh3k16ihscv0j/ytsaurus-nightly --tag ${INVOCATION_ID}
       - name: Unittests
         shell: bash
         run: |
@@ -67,19 +67,19 @@ jobs:
           cd ../build
           ./run_unittests.sh
 
-  stop-vm:
-    name: Stop VM
-    needs:
-      - start-vm
-      - check
-    runs-on: trampoline
-    if: ${{ always() }}
-    steps:
-      - name: Stop YC runner
-        uses: yc-actions/yc-github-runner@v1
-        with:
-          mode: stop
-          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          label: ${{ needs.start-vm.outputs.label }}
-          instance-id: ${{ needs.start-vm.outputs.instance-id }}
+#  stop-vm:
+#    name: Stop VM
+#    needs:
+#      - start-vm
+#      - check
+#    runs-on: trampoline
+#    if: ${{ always() }}
+#    steps:
+#      - name: Stop YC runner
+#        uses: yc-actions/yc-github-runner@v1
+#        with:
+#          mode: stop
+#          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+#          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+#          label: ${{ needs.start-vm.outputs.label }}
+#          instance-id: ${{ needs.start-vm.outputs.instance-id }}

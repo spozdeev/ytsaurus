@@ -2,6 +2,8 @@
 
 set -e
 
+echo $@
+
 script_name=$0
 
 ytsaurus_source_path="."

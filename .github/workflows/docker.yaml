@@ -46,11 +46,13 @@ jobs:
       - checkout
     runs-on: ${{ needs.start-vm.outputs.label }}
     steps:
-#      - name: Build Go
-#        shell: bash
-#        run: |
-#          cd yt/chyt/controller/cmd/chyt-controller
-#          /usr/local/go/bin/go build
+      - name: Build Go
+        shell: bash
+        run: |
+          cd yt/chyt/controller/cmd/chyt-controller && pwd
+          pwd
+          env
+          /usr/local/go/bin/go build
 
       - name: Docker
         shell: bash

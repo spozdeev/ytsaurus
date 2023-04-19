@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-        ci1
+      - ci1
 
 jobs:
   start-vm:

@@ -6,7 +6,7 @@ import logging
 import glob
 import os
 
-from .os_helpers import (
+from os_helpers import (
     apply_multiple,
     cp_r,
     cp,

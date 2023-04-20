@@ -46,10 +46,11 @@ jobs:
       - checkout
     runs-on: ${{ needs.start-vm.outputs.label }}
     steps:
-       - name: Build Py
-         shell: bash
-         run: |
+      - name: Build Py
+        shell: bash
+        run: |
           ./yt/docker/yt_nightly/build_py.sh --ytsaurus-source-path $(pwd) --ytsaurus-build-path ../build
+
 #      - name: Build Go
 #        shell: bash
 #        run: |

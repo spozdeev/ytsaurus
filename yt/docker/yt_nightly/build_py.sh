@@ -45,7 +45,7 @@ $ytsaurus_source_path/yt/python/packages/yt_setup/generate_python_proto.py \
 $ytsaurus_source_path/yt/python/packages/yt_setup/prepare_python_modules.py \
     --source-root ${ytsaurus_source_path} \
     --build-root ${ytsaurus_build_path} \
-    --output_path ${ytsaurus_python} \
+    --output-path ${ytsaurus_python} \
     --prepare-bindings-libraries
 
 cp ${ytsaurus_source_path}/yt/python/packages/ytsaurus-native-driver/setup.py ${ytsaurus_python}

@@ -21,3 +21,5 @@ RUN ln /usr/bin/ytserver-all /usr/bin/ytserver-master && \
     ln /usr/bin/ytserver-all /usr/bin/ytserver-scheduler && \
     ln /usr/bin/ytserver-all /usr/bin/ytserver-controller-agent && \
     ln /usr/bin/ytserver-all /usr/bin/ytserver-query-tracker
+
+RUN cp /usr/local/bin/yt /usr/bin/yt

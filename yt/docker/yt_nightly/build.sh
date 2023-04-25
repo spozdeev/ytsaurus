@@ -68,6 +68,9 @@ cp ${ytserver_all_path} ${output_path}
 cp ${ytserver_clickhouse} ${output_path}
 cp ${ytserver_log_tailer} ${output_path}
 cp ${chyt_controller} ${output_path}
+cp ${init_operation_archive} ${output_path}
+cp ${clickhouse_trampoline} ${output_path}
+cp ${driver_wheel} ${output_path}
 cp ${dockerfile} ${output_path}
 
 cd ${output_path}

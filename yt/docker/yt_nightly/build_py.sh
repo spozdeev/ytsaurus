@@ -16,11 +16,11 @@ while [[ $# -gt 0 ]]; do
     key="$1"
     case $key in
         --ytsaurus-source-path)
-        ytsaurus_source_path="$2"
+        ytsaurus_source_path=$(realpath "$2")
         shift 2
         ;;
         --ytsaurus-build-path)
-        ytsaurus_build_path="$2"
+        ytsaurus_build_path=$(realpath "$2")
         shift 2
         ;;
         *)
@@ -30,7 +30,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-ytsaurus_python="${ytsaurus_build_path}/ytsaurus_python"
+ytsaurus_python=$(realpath "${ytsaurus_build_path}/ytsaurus_python")
 
 mkdir -p ${ytsaurus_python}
 

@@ -37,12 +37,13 @@ mkdir -p ${ytsaurus_python}
 cd ${ytsaurus_source_path}
 pip3 install -e yt/python/packages
 
-$ytsaurus_source_path/yt/python/packages/yt_setup/generate_python_proto.py \
+cd $ytsaurus_source_path/yt/python/packages/yt_setup/generate_python_proto.py \
     --source-root ${ytsaurus_source_path} \
     --output ${ytsaurus_python}
 
 
-$ytsaurus_source_path/yt/python/packages/yt_setup/prepare_python_modules.py \
+cd $ytsaurus_source_path/yt/python/packages
+python -m yt_setup.prepare_python_modules \
     --source-root ${ytsaurus_source_path} \
     --build-root ${ytsaurus_build_path} \
     --output-path ${ytsaurus_python} \

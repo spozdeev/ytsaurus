@@ -61,11 +61,11 @@ jobs:
           rm -rf *
           cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../ytsaurus/clang.toolchain ../ytsaurus
 
-#      - name: Build
-#        shell: bash
-#        run: |
-#          cd ../build
-#          ninja
+      - name: Build
+        shell: bash
+        run: |
+          cd ../build
+          ninja
 
       - name: Build Py
         shell: bash

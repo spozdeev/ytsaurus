@@ -8,6 +8,15 @@ script_name=$0
 ytsaurus_source_path="."
 ytsaurus_build_path="."
 
+print_usage() {
+    cat << EOF
+Usage: $script_name [-h|--help]
+                    [--ytsaurus-source-path /path/to/ytsaurus.repo]
+                    [--ytsaurus-build-path /path/to/ytsaurus.build]
+EOF
+    exit 1
+}
+
 if [[ $# -eq 0 ]]; then
     print_usage
 fi

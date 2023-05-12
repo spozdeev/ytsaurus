@@ -74,7 +74,7 @@ jobs:
       - name: Unittests
         shell: bash
         run: |
-          cp ./yt/yt/scripts/run_unittests.sh ../build/
+          cp ./yt/yt/scripts/run_unittests.sh /home/dmitry/build/
           cd /home/dmitry/build
           ./run_unittests.sh
 

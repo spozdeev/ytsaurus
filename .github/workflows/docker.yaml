@@ -61,6 +61,7 @@ jobs:
       - name: Build Py
         shell: bash
         run: |
+          rm -rf /home/dmitry/build/ytsaurus_python
           bash ./yt/docker/yt_nightly/build_py.sh --ytsaurus-source-path $(pwd) --ytsaurus-build-path /home/dmitry/build
 
       - name: Docker

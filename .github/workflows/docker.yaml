@@ -3,7 +3,7 @@ name: Docker image CI
 on:
   push:
     branches:
-      - main
+      - ci-try-docker-fix
 
 jobs:
   start-vm:
@@ -21,7 +21,7 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           folder-id: b1gcvl619mdunf1cqqbv
-          image-id: fd8ref8pd2uefi7o6kh3
+          image-id: fd8bh7nihdnnfker7016
           zone-id: 'ru-central1-b'
           subnet-id: e2lno1rkqo63l729dlo7
           cores: 16
@@ -58,37 +58,23 @@ jobs:
           export HOME=${RUNNER_WORKSPACE}
           /usr/local/go/bin/go build
 
-      - name: Configure
-        shell: bash
-        run: |
-          mkdir -p ../build
-          cd ../build
-          rm -rf *
-          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../ytsaurus/clang.toolchain ../ytsaurus
-
-      - name: Build
-        shell: bash
-        run: |
-          cd ../build
-          ninja
-
       - name: Build Py
         shell: bash
         run: |
-          ./yt/docker/yt_nightly/build_py.sh --ytsaurus-source-path $(pwd) --ytsaurus-build-path ../build
+          bash ./yt/docker/yt_nightly/build_py.sh --ytsaurus-source-path $(pwd) --ytsaurus-build-path /home/dmitry/build
 
       - name: Docker
         shell: bash
         run: |
           mkdir -p ../docker-build
-          bash ./yt/docker/yt_nightly/build.sh --ytsaurus-source-path $(pwd) --ytsaurus-build-path ../build --output-path ../docker-build --registry cr.yandex/crpl84hkh3k16ihscv0j/ytsaurus-nightly --tag ${INVOCATION_ID}
+          bash ./yt/docker/yt_nightly/build.sh --ytsaurus-source-path $(pwd) --ytsaurus-build-path /home/dmitry/build --output-path ../docker-build --registry cr.yandex/crpl84hkh3k16ihscv0j/ytsaurus-nightly --tag ${INVOCATION_ID}
           docker push cr.yandex/crpl84hkh3k16ihscv0j/ytsaurus-nightly:${INVOCATION_ID}
 
       - name: Unittests
         shell: bash
         run: |
           cp ./yt/yt/scripts/run_unittests.sh ../build/
-          cd ../build
+          cd /home/dmitry/build
           ./run_unittests.sh
 
   stop-vm:

@@ -3,7 +3,7 @@ name: Docker image CI
 on:
   push:
     branches:
-      - main
+      - ci-ubuntu-from-local-registry
 
 jobs:
   start-vm:

@@ -34,6 +34,10 @@ while [[ $# -gt 0 ]]; do
         ytsaurus_build_path="$2"
         shift 2
         ;;
+        --output-path)
+        output_path="$2"
+        shift 2
+        ;;
         --ytsaurus-yql-package-path)
         ytsaurus_yql_package_path="$2"
         shift 2

@@ -98,6 +98,8 @@ public:
     //! IO Engine config.
     NYTree::INodePtr IOConfig;
 
+    bool EnableUring;
+
     TDuration ThrottleDuration;
 
     //! Maximum number of bytes in the gap between two adjacent read locations

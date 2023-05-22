@@ -130,6 +130,9 @@ void TChunkLocationConfig::Register(TRegistrar registrar)
     registrar.Parameter("reset_uuid", &TThis::ResetUuid)
         .Default(false);
 
+    registrar.Parameter("enable_uring", &TThis::EnableUring)
+        .Default(true);
+
     registrar.Postprocessor([] (TThis* config) {
         for (auto kind : TEnumTraits<EChunkLocationThrottlerKind>::GetDomainValues()) {
             if (!config->Throttlers[kind]) {

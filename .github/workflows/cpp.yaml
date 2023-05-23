@@ -94,8 +94,8 @@ jobs:
           tar -xf spyt-1.69.tar -C ../build
           tar -xf yql-package.tar -C ../build
           mkdir -p ../docker-ytsaurus-build
-          bash ./yt/docker/ytsaurus/build.sh --ytsaurus-source-path $(pwd) --ytsaurus-build-path ../build --ytsaurus-spyt-release-path ../build/spyt_release --ytsaurus-yql-package-path ../build/yql_package --output-path ../docker-ytsaurus-build --image-tag 23.1-latest
-          docker push ytsaurus/ytsaurus:23.1-latest
+          bash ./yt/docker/ytsaurus/build.sh --ytsaurus-source-path $(pwd) --ytsaurus-build-path ../build --ytsaurus-spyt-release-path ../build/spyt_release --ytsaurus-yql-package-path ../build/yql_package --output-path ../docker-ytsaurus-build --image-tag unstable:0.0.3
+          docker push ytsaurus/ytsaurus:unstable-0.0.3
 
       - name: Docker registry login
         shell: bash

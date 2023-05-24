@@ -74,7 +74,7 @@ RUN python3.7 -m pip install \
 
 # Local built package with native driver bindings.
 COPY ./ytsaurus_native_driver-1.0.0-cp34-abi3-linux_x86_64.whl /tmp/ytsaurus_native_driver-1.0.0-py2.py3-none-any.whl
-RUN /opt/conda/bin/python3.7 -m pip install /tmp/ytsaurus_native_driver-1.0.0-py2.py3-none-any.whl
+RUN python3.7 -m pip install /tmp/ytsaurus_native_driver-1.0.0-py2.py3-none-any.whl
 RUN rm /tmp/ytsaurus_native_driver-1.0.0-py2.py3-none-any.whl
 
 RUN ln -s /usr/lib/jvm/java-11-openjdk-amd64 /opt/jdk11

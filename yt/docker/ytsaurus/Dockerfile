@@ -48,7 +48,10 @@ COPY ./credits/chyt-controller.CREDITS  /usr/bin/chyt-controller.CREDITS
 COPY ./credits/ytserver-clickhouse.CREDITS /usr/bin/ytserver-clickhouse.CREDITS
 COPY ./credits/ytserver-log-tailer.CREDITS  /usr/bin/ytserver-log-tailer.CREDITS
 
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y \
+RUN apt-get update && apt-get install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y \
   curl \
   less \
   gdb \
@@ -59,18 +62,25 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update && DEBIAN_FRONTEND=
   iputils-ping \
   lsb-release \
   openjdk-11-jdk \
-  python3.10
+  python3.7 \
+  python3-pip \
+  python3.7-distutils
 
-RUN pip install \
+RUN python3.7 -m pip install \
     ytsaurus-client \
     ytsaurus-yson \
     ytsaurus-local \
     ytsaurus-spyt==${SPYT_VERSION}
 
 # Local built package with native driver bindings.
-RUN pip install ./ytsaurus_native_driver-1.0.0-cp34-abi3-linux_x86_64.whl
+RUN python3.7 -m pip install ./ytsaurus_native_driver-1.0.0-cp34-abi3-linux_x86_64.whl
 
 RUN ln -s /usr/lib/jvm/java-11-openjdk-amd64 /opt/jdk11
+
+# Default python to be used by python3 jobs, for compatibility with jupyter tutorial.
+RUN ln -s /usr/bin/python3.7 /usr/bin/python3 -f
+# Force lsb_release to use python it was born to use.
+RUN sed -i 's/python3/python3.8/' /usr/bin/lsb_release
 
 # TODO: add opportunity to get this files in opensource
 # Static binaries & shared libraries built in arcadia.

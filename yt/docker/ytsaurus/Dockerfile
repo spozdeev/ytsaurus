@@ -48,7 +48,7 @@ COPY ./credits/chyt-controller.CREDITS  /usr/bin/chyt-controller.CREDITS
 COPY ./credits/ytserver-clickhouse.CREDITS /usr/bin/ytserver-clickhouse.CREDITS
 COPY ./credits/ytserver-log-tailer.CREDITS  /usr/bin/ytserver-log-tailer.CREDITS
 
-RUN apt-get update && apt-get install -y \
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update && apt-get install -y \
   curl \
   less \
   gdb \
